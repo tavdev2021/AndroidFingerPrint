@@ -1,5 +1,6 @@
 package com.example.androidfingerprint
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -33,7 +34,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                tvAuthStatus.text="Successfully Auth"
+                val intent = Intent(this@MainActivity,resultActivity::class.java)
+                startActivity(intent)
+                tvAuthStatus.text="Auth Status"
             }
 
             override fun onAuthenticationFailed() {
