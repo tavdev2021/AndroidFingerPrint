@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import www.sanju.motiontoast.MotionToast
+import www.sanju.motiontoast.MotionToastStyle
 import java.util.concurrent.Executor
 
 class MainActivity : AppCompatActivity() {
@@ -29,26 +32,49 @@ class MainActivity : AppCompatActivity() {
         biometricPrompt = BiometricPrompt(this@MainActivity,executor,object : BiometricPrompt.AuthenticationCallback(){
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
-                tvAuthStatus.text = "Error "+errString
+
+                MotionToast.Companion.createToast(this@MainActivity,
+                    "Autenticacion Fallida ☹️",
+                    "Error: $errString",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.SHORT_DURATION,
+                    ResourcesCompat.getFont(this@MainActivity,R.font.helvetica_regular))
+
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
+
+                MotionToast.Companion.createToast(this@MainActivity,
+                    "Autenticacion Exitosa 😍",
+                    "Autenticacion Completada!",
+                    MotionToastStyle.SUCCESS,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.SHORT_DURATION,
+                    ResourcesCompat.getFont(this@MainActivity,R.font.helvetica_regular))
+
                 val intent = Intent(this@MainActivity,resultActivity::class.java)
-                startActivity(intent)
-                tvAuthStatus.text="Auth Status"
+                //startActivity(intent)
             }
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                tvAuthStatus.text="Authentication Failed"
+
+                MotionToast.Companion.createToast(this@MainActivity,
+                    "La huella no coincide",
+                    "Authentication Fallida",
+                    MotionToastStyle.WARNING,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.SHORT_DURATION,
+                    ResourcesCompat.getFont(this@MainActivity,R.font.helvetica_regular))
             }
         })
 
         promptinfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Biometric Authentication")
             .setSubtitle("Login using fingerprint or face")
-            .setNegativeButtonText("Cancel")
+            .setNegativeButtonText("Cancelar")
             .build()
 
         btnAuth.setOnClickListener {
