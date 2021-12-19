@@ -8,10 +8,22 @@
     android:orientation="vertical"
     tools:context=".resultActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp">
+        android:layout_height="250dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/yaneth">
+        </ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"

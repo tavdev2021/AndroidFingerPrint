@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -14,19 +14,18 @@ import java.util.concurrent.Executor
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var btnAuth : Button;
-    lateinit var tvAuthStatus : TextView;
+    private lateinit var btnAuth : Button
+    private lateinit var ivFinger : ImageView
+    private lateinit var executor : Executor
+    private lateinit var biometricPrompt : BiometricPrompt
+    private lateinit var promptinfo : BiometricPrompt.PromptInfo
 
-    lateinit var executor : Executor;
-    lateinit var biometricPrompt : BiometricPrompt
-    lateinit var promptinfo : BiometricPrompt.PromptInfo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnAuth = findViewById(R.id.btnAuth);
-        tvAuthStatus = findViewById(R.id.tvAuthStatus);
-
+        btnAuth = findViewById(R.id.btnAuth)
+        ivFinger = findViewById(R.id.ivFinger)
         executor = ContextCompat.getMainExecutor(this)
 
         biometricPrompt = BiometricPrompt(this@MainActivity,executor,object : BiometricPrompt.AuthenticationCallback(){
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     ResourcesCompat.getFont(this@MainActivity,R.font.helvetica_regular))
 
                 val intent = Intent(this@MainActivity,resultActivity::class.java)
-                //startActivity(intent)
+                startActivity(intent)
             }
 
             override fun onAuthenticationFailed() {
@@ -79,6 +78,10 @@ class MainActivity : AppCompatActivity() {
 
         btnAuth.setOnClickListener {
 
+        biometricPrompt.authenticate(promptinfo)
+        }
+
+        ivFinger.setOnClickListener {
             biometricPrompt.authenticate(promptinfo)
         }
     }
