@@ -14,7 +14,6 @@ import java.util.concurrent.Executor
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnAuth : Button
     private lateinit var ivFinger : ImageView
     private lateinit var executor : Executor
     private lateinit var biometricPrompt : BiometricPrompt
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnAuth = findViewById(R.id.btnAuth)
         ivFinger = findViewById(R.id.ivFinger)
         executor = ContextCompat.getMainExecutor(this)
 
@@ -75,11 +73,6 @@ class MainActivity : AppCompatActivity() {
             .setSubtitle("Login using fingerprint or face")
             .setNegativeButtonText("Cancelar")
             .build()
-
-        btnAuth.setOnClickListener {
-
-        biometricPrompt.authenticate(promptinfo)
-        }
 
         ivFinger.setOnClickListener {
             biometricPrompt.authenticate(promptinfo)
