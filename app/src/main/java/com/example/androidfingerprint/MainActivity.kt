@@ -3,7 +3,6 @@ package com.example.androidfingerprint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
