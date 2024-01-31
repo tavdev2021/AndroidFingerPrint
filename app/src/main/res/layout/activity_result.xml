@@ -51,6 +51,19 @@
             app:lottie_rawRes="@raw/successfully">
         </com.airbnb.lottie.LottieAnimationView>
 
+        <Button
+            android:id="@+id/btncerrar"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Cerrar App"
+            android:textStyle="italic"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true">
+
+    </Button>
+
     </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
