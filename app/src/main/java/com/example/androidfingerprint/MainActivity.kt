@@ -3,26 +3,27 @@ package com.example.androidfingerprint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.example.androidfingerprint.databinding.ActivityMainBinding
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 import java.util.concurrent.Executor
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var ivFinger : ImageView
     private lateinit var executor : Executor
     private lateinit var biometricPrompt : BiometricPrompt
     private lateinit var promptinfo : BiometricPrompt.PromptInfo
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        ivFinger = findViewById(R.id.ivFinger)
         executor = ContextCompat.getMainExecutor(this)
 
         biometricPrompt = BiometricPrompt(this@MainActivity,executor,object : BiometricPrompt.AuthenticationCallback(){
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
                 val intent = Intent(this@MainActivity,resultActivity::class.java)
                 startActivity(intent)
+                finish()
             }
 
             override fun onAuthenticationFailed() {
@@ -73,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButtonText("Cancelar")
             .build()
 
-        ivFinger.setOnClickListener {
+        binding.ivFinger.setOnClickListener {
             biometricPrompt.authenticate(promptinfo)
         }
     }
