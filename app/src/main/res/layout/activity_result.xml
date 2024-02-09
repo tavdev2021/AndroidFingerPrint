@@ -24,6 +24,7 @@
         tools:context=".MainActivity">
 
         <TextView
+            android:id="@+id/tvsucces"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/auth_successfully"
@@ -31,6 +32,16 @@
             android:textColor="@color/black"
             android:textAlignment="center">
         </TextView>
+
+        <ImageView
+            android:id="@+id/ivclose"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/exit"
+            android:layout_below="@id/tvsucces"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp">
+        </ImageView>
 
         <ImageView
             android:id="@+id/ivKeyopen"

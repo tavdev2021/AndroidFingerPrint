@@ -1,6 +1,7 @@
 package com.example.androidfingerprint
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,16 @@ class resultActivity : AppCompatActivity() {
         val message : String? = "Esta seguro que desea cerrar la aplicacion?"
         showCustomDialogBox(message)
         }
+
+        binding.ivclose.setOnClickListener {
+            cerrarSesion()
+        }
+    }
+
+    private fun cerrarSesion() {
+       val intent = Intent (this@resultActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun showCustomDialogBox(message: String?) {
